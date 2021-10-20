@@ -87,7 +87,7 @@ class Hunter extends Traveler{
     }
 
     giveFood(traveler, giveFood){
-        if(giveFood >= this.food){
+        if(giveFood <= this.food){
             traveler.food += giveFood
             this.food -= giveFood
         }
@@ -150,17 +150,15 @@ class Wagon{
         }
     }
     
-    shouldQuarantine(isHealthy){
+    shouldQuarantine(){
+        let quarentena = false
 
         this.list.forEach(pessoa =>{
             if(!pessoa.isHealthy){
-                isHealthy = false
+                quarentena = true
             }
         })
-        if(isHealthy){
-            return false
-        }
-        return true
+        return quarentena
 
     }
 
@@ -218,6 +216,7 @@ console.log(`#7: There should be 7 total food. Actual: ${wagon.totalFood()}`);
 
 drsmith.heal(juan);
 console.log(`#8: Quarantine should be false. Actual: ${wagon.shouldQuarantine()}`);
+
 
 sarahunter.giveFood(juan, 4);
 sarahunter.eat(); // Ela só tem um, então ela come e fica doente
